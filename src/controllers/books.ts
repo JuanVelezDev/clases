@@ -75,7 +75,7 @@ const createBook = async (req: Request, res: Response) => {
             data: updatedBook,
         });
     } catch (error) {
-        handleHttp(res, "error when updating book", statusCode, error);
+        handleHttp(res, "error when updating books", statusCode, error);
     }
 };
 
