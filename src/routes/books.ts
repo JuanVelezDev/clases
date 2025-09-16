@@ -1,5 +1,5 @@
 import { Router, type Request, type Response } from 'express'
-import { createBook, getBook, getBooks, deleteBooks } from '../controllers/books.ts'
+import { createBook, getBook, getBooks, deleteBooks, updateBook } from '../controllers/books.ts'
 
 const router:Router = Router()
 
@@ -13,5 +13,8 @@ router.get("/", (req:Request, res:Response)=> {
 router.get('/:id', getBook)
 router.post('/', createBook)
 router.delete('/:id', deleteBooks)
+router.put('/:id',updateBook )
+
+
 
 export { router }

@@ -1,7 +1,7 @@
 import { type Request, type Response } from 'express';
 import { handleHttp } from '../utils/error.handler.ts'
 import { type HttpErrorStatus } from '../types/types.ts'
-import { getBooks as getBooksService, deleteBook as deleteBookService, addBook as addBookService } from '../services/book.service.ts';
+import { getBooks as getBooksService, deleteBook as deleteBookService, addBook as addBookService, updateBookService as updateBookService } from '../services/book.service.ts';
 
 const getBook = (req: Request, res: Response) => {  
     const statusCode: HttpErrorStatus = 500
@@ -53,12 +53,30 @@ const createBook = async (req: Request, res: Response) => {
     }
 }
 
-const updateBooks = (req: Request, res: Response) => {  
+ const updateBook = async (req: Request, res: Response): Promise<void> => {
+    let statusCode: HttpErrorStatus = 500;
     try {
+        const { id } = req.params;
+        const updateData = req.body;
 
-    }catch(err){
-        
+        const updatedBook = await updateBookService(id!, updateData);
+
+        if (!updatedBook) {
+            res.status(404).json({
+                ok: false,
+                message: "Book not found",
+            });
+            return;
+        }
+
+        res.status(200).json({
+            ok: true,
+            message: "Book updated successfully",
+            data: updatedBook,
+        });
+    } catch (error) {
+        handleHttp(res, "error when updating book", statusCode, error);
     }
-}
+};
 
-export { getBook, getBooks, deleteBooks, createBook, updateBooks}
+export { getBook, getBooks, deleteBooks, createBook, updateBook}

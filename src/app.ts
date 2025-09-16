@@ -11,9 +11,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.use('/books', booksRouter)
+
 await initRoutes()
 app.use(router)
-app.use('/books', booksRouter)
+
 
 
 app.listen(PORT, () => {
