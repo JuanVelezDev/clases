@@ -4,3 +4,8 @@ export interface IBook {
     name: string,
     ouwner: string
 }
+
+export interface IUser {
+  name: string;
+  role: string;
+}

@@ -7,7 +7,6 @@ const router:Router = Router()
  */
 
 router.get("/", (req:Request, res:Response)=> {
-    console.log("vamos ok")
     getBooks(req, res)
 })
 router.get('/:id', getBook)

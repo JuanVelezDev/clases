@@ -11,7 +11,6 @@ const filePath = join(__dirname, "../models/book.json")
 
 export const getBooks = async (): Promise<IBook[]> => {
   const data = await fs.readFile(filePath, "utf-8")
-  console.log('filePath', filePath)
   return JSON.parse(data) as IBook[]
 }
 

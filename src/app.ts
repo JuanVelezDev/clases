@@ -14,5 +14,5 @@ await initRoutes()
 app.use(router)
 
 app.listen(PORT, () => {
-    console.log("Servidor corriendo en 3002")
+    console.log(`Corriendo en puerto ${PORT}`)
 })

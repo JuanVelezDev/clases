@@ -14,10 +14,8 @@ const getBook = (req: Request, res: Response) => {
 
 const getBooks = (req: Request, res: Response) => {  
     try {
-        console.log("Entra", req)
         getBooksService().then((response)=>{
-            console.log(response)
-            res.send(response)
+            res.json(response)
         })
     }catch(err){
         
