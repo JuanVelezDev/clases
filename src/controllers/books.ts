@@ -1,14 +1,24 @@
 import { type Request, type Response } from 'express';
 import { handleHttp } from '../utils/error.handler.ts'
 import { type HttpErrorStatus } from '../types/types.ts'
-import { getBooks as getBooksService, deleteBook as deleteBookService, addBook as addBookService, updateBookService as updateBookService } from '../services/book.service.ts';
+import { getBooks as getBooksService, getBookById, deleteBook as deleteBookService, addBook as addBookService, updateBookService as updateBookService } from '../services/book.service.ts';
 
-const getBook = (req: Request, res: Response) => {  
+const getBook = async (req: Request, res: Response) => {  
     const statusCode: HttpErrorStatus = 500
     try {
+        const { id } = req.params;
+        if (!id || typeof id !== 'string') {
+            return res.status(400).json({ message: 'ID is required' });
+        }
         
+        const book = await getBookById(id);
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+        
+        res.json(book);
     }catch(err){
-        handleHttp(res, "Something crashed your app", statusCode, err)
+        handleHttp(res, "Error getting book", statusCode, err)
     }
 }
 
