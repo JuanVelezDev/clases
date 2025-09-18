@@ -4,6 +4,7 @@ import path from 'path'
 import { corsConfig } from './middlewares/cors.middleware.ts'
 import { router, initRoutes } from './routes/index.ts'
 import { router as booksRouter } from './routes/books.ts'
+import './cron.ts'
 
 const PORT = process.env.PORT || 3003
 
